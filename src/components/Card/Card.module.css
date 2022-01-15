@@ -1,0 +1,78 @@
+.card {
+    border-radius: var(--border-radius);
+    background: var(--bg2);
+}
+.card--RD {
+    background: var(--lc-red);
+}
+.card--BL {
+    background: var(--lc-blue);
+}
+.card--YL {
+    background: var(--lc-yellow);
+}
+.card--OR {
+    background: var(--lc-orange);
+}
+.card--GR {
+    background: var(--lc-green);
+}
+.card--SV {
+    background: var(--lc-silver);
+}
+
+.card__top {
+    height: 32px;
+    padding-right: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 44px;
+    overflow: hidden;
+    font-weight: 500;
+    color: var(--bg3);
+}
+
+.card__content {
+    border-radius: var(--border-radius-2);
+    background: var(--bg3);
+    /* height: 175px; */
+    padding: var(--md-spacing);
+    min-height: calc(100% - 32px);
+}
+
+.card__content span {
+    display: block;
+}
+
+.card__content__carcount {
+    margin-bottom: var(--md-spacing);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.card__content__carcount__span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.card__content__trainnumber {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: var(--sm-spacing);
+}
+.card__content__servicetype {
+    color: var(--text2);
+}
+
+.carcount-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1px;
+}
+
+.carcount-grid__item {
+    height: 2px;
+    width: 2px;
+    background: var(--text);
+}

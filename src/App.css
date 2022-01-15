@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+    --header-height: 80px;
+    --sm-spacing: 10px;
+    --md-spacing: 20px;
+    --lg-spacing: 40px;
+    --xl-spacing: 80px;
+    --s-sm: 37.5em;
+    --s-md: 48em;
+    --s-lg: 64em;
+    --s-xl: 75em;
+
+    --lc-blue: rgb(31, 147, 209);
+    --lc-green: rgb(29, 176, 82);
+    --lc-orange: rgb(220, 137, 39);
+    --lc-red: rgb(192, 31, 60);
+    --lc-silver: rgb(161, 163, 161);
+    --lc-yellow: rgb(244, 212, 21);
+
+    --border-radius: 22px;
+    --border-radius-2: 11px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+    font-family: "Roboto", sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.light {
+    --bg: rgb(255, 255, 255);
+    --bg2: rgb(250, 250, 250);
+    --bg3: rgb(240, 240, 240);
+    --text: rgb(0, 0, 0);
+    --text2: rgb(68, 68, 68);
 }
 
-.App-link {
-  color: #61dafb;
+.dark {
+    --bg: rgb(33, 33, 33);
+    --bg2: rgb(24, 24, 24);
+    --bg3: rgb(18, 18, 18);
+    --text: rgb(255, 255, 255);
+    --text2: rgb(213, 213, 213);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.body {
+    background: var(--bg);
+    color: var(--text);
+    height: 100%;
+    min-height: 100vh;
 }

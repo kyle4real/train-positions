@@ -1,0 +1,17 @@
+.page {
+    padding: var(--md-spacing);
+    transition: 0.3s ease padding;
+    max-width: var(--s-lg);
+    margin: 0 auto;
+}
+
+@media (min-width: 37.5em) {
+    .page {
+        padding: var(--lg-spacing) var(--md-spacing);
+    }
+}
+@media (min-width: 64em) {
+    .page {
+        padding: var(--lg-spacing);
+    }
+}
