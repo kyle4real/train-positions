@@ -1,0 +1,17 @@
+.button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.rotate {
+    transform: rotate(-90deg);
+}
+
+.button__dropdownicon {
+    margin-left: var(--sm-spacing);
+    font-weight: 700;
+    display: flex;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}

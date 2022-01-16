@@ -1,0 +1,17 @@
+.checkbox {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    background: var(--bg);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--sm-spacing);
+}
+
+.checkbox > svg {
+    display: block;
+}

@@ -1,0 +1,32 @@
+.filtersgrid {
+    margin-top: var(--md-spacing);
+    display: grid;
+    gap: var(--sm-spacing);
+}
+
+@media (min-width: 37.5em) {
+    .filtersgrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 64em) {
+    .filtersgrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.filtersgrid__item {
+    background: var(--bg2);
+    min-height: 200px;
+    padding: var(--md-spacing);
+    border-radius: var(--border-radius-2);
+}
+
+.filtersgrid__item__title {
+    display: block;
+    font-size: 14px;
+    padding-bottom: var(--sm-spacing);
+    border-bottom: 1px solid var(--bg);
+    margin-bottom: var(--md-spacing);
+}

@@ -1,0 +1,8 @@
+.linecolor {
+    display: block;
+    width: 100%;
+    border-radius: var(--border-radius-2);
+    text-align: center;
+    color: var(--bg2);
+    font-weight: 500;
+}

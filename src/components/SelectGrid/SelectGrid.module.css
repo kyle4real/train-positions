@@ -1,0 +1,16 @@
+.selectgrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sm-spacing);
+}
+
+.selectgrid__option {
+    /* border: 1px solid var(--bg); */
+    display: flex;
+    align-items: center;
+    padding: var(--sm-spacing);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-2);
+    font-size: 14px;
+    cursor: pointer;
+}

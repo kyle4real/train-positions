@@ -2,12 +2,12 @@ import React, { Fragment } from "react";
 import Card from "../Card/Card";
 import styles from "./Grid.module.css";
 
-const Grid = ({ trainPositions }) => {
+const Grid = ({ trains }) => {
     return (
         <div className={styles.grid}>
-            {trainPositions.map((trainPosition) => (
-                <Fragment key={trainPosition.trainId}>
-                    <Card trainPosition={trainPosition} />
+            {trains.map((train) => (
+                <Fragment key={train.trainId}>
+                    <Card train={train} />
                 </Fragment>
             ))}
         </div>
