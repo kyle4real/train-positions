@@ -11,7 +11,7 @@ import useSearch from "../hooks/useSearch";
 
 const Home = () => {
     const [filterOpen, setFilterOpen] = useState(false);
-    const { filterArr } = useSearch({ resourceArr: trains, filters });
+    const { filterArr, searchedArr } = useSearch({ resourceArr: trains, filters });
 
     return (
         <>
@@ -27,7 +27,7 @@ const Home = () => {
                     <FiltersGrid filters={filterArr} />
                 </Accordian>
             </PageHead>
-            <Grid trains={trains} />
+            <Grid trains={searchedArr} />
         </>
     );
 };

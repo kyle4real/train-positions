@@ -36,12 +36,12 @@
 }
 .card__content__carcount__span {
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .card__content__trainnumber {
     font-size: 32px;
-    font-weight: 300;
+    font-weight: 500;
     margin-bottom: var(--sm-spacing);
 }
 .card__content__servicetype {

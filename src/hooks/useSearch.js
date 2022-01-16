@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const getSet = (resourceArr, target) => {
     return resourceArr.reduce((r, v) => r.add(v[target]), new Set());
@@ -18,10 +18,14 @@ const getMinMax = (resourceArr, target) => {
 };
 
 const useSearch = ({ resourceArr, filters }) => {
-    const [filter, setFilter] = useState(null);
+    const [filterObj, setFilterObj] = useState(null);
+
+    const filtersIndexHash = useMemo(() => {
+        return filters.reduce((r, v, i) => ({ ...r, [v.target]: i }), {});
+    }, [filters]);
 
     const onFilterChange = ({ target, filterArr }) => {
-        setFilter((p) => {
+        setFilterObj((p) => {
             const cpy = { ...p };
             if (filterArr === null) delete cpy[target];
             else cpy[target] = filterArr;
@@ -29,6 +33,32 @@ const useSearch = ({ resourceArr, filters }) => {
             else return cpy;
         });
     };
+
+    const searchedArr = useMemo(() => {
+        if (!resourceArr) return null;
+        let newResourceArr = resourceArr;
+        if (!!filterObj) {
+            const targetKeys = Object.keys(filterObj);
+            newResourceArr = newResourceArr.filter((resource) => {
+                let filter = true;
+                targetKeys.forEach((targetKey) => {
+                    const { type } = filters[filtersIndexHash[targetKey]];
+                    const targetValue = resource[targetKey];
+                    if (type === "byValue") {
+                        const filterValues = filterObj[targetKey];
+                        filterValues.forEach((value) => {
+                            if (value === targetValue) filter = false;
+                        });
+                    } else if (type === "range") {
+                        const [min, max] = filterObj[targetKey];
+                        if (targetValue < min || targetValue > max) filter = false;
+                    }
+                });
+                return filter;
+            });
+        }
+        return newResourceArr;
+    }, [resourceArr, filterObj, filters, filtersIndexHash]);
 
     const filterArr = filters.reduce((r, v) => {
         const { target, type, callback, label } = v;
@@ -41,7 +71,7 @@ const useSearch = ({ resourceArr, filters }) => {
                     component: callback({
                         optionsSet,
                         onFilterChange: (filterArr) => onFilterChange({ target, filterArr }),
-                        filterValues: filter?.[target] || null,
+                        filterValues: filterObj?.[target] || null,
                     }),
                 },
             ];
@@ -54,14 +84,14 @@ const useSearch = ({ resourceArr, filters }) => {
                     component: callback({
                         minMax,
                         onFilterChange: (filterArr) => onFilterChange({ target, filterArr }),
-                        filterValues: filter?.[target] || null,
+                        filterValues: filterObj?.[target] || null,
                     }),
                 },
             ];
         }
     }, []);
 
-    return { filterArr };
+    return { searchedArr, filterArr };
 };
 
 export default useSearch;
