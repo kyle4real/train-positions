@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import Grid from "./components/Grid/Grid";
 import Layout from "./components/Layout/Layout";
 import { ThemeContext } from "./context/ThemeContext";
 import Home from "./pages/Home";

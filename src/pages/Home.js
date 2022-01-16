@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import Accordian from "../components/Accordian/Accordian";
+import DoubleRange from "../components/DoubleRange/DoubleRange";
 import DropdownButton from "../components/DropdownButton/DropdownButton";
 import FiltersGrid from "../components/FiltersGrid/FiltersGrid";
 import Grid from "../components/Grid/Grid";
+import LineColor from "../components/LineColor/LineColor";
 import PageHead from "../components/PageHead/PageHead";
+import SelectGrid from "../components/SelectGrid/SelectGrid";
+import useSearch from "../hooks/useSearch";
 
 const Home = () => {
     const [filterOpen, setFilterOpen] = useState(false);
+    const { filterArr } = useSearch({ resourceArr: trains, filters });
 
     return (
         <>
@@ -19,13 +24,54 @@ const Home = () => {
                 }
             >
                 <Accordian isOpen={filterOpen}>
-                    <FiltersGrid />
+                    <FiltersGrid filters={filterArr} />
                 </Accordian>
             </PageHead>
             <Grid trains={trains} />
         </>
     );
 };
+
+const filters = [
+    {
+        label: "Filter by Line Color",
+        type: "byValue",
+        target: "LineCode",
+        callback: ({ optionsSet, filterValues, onFilterChange }) => (
+            <SelectGrid
+                optionCallback={(value) => <LineColor linecolor={value} />}
+                options={[...optionsSet]}
+                filterValues={filterValues}
+                onFilterChange={onFilterChange}
+            />
+        ),
+    },
+    {
+        label: "Filter by Service Type",
+        type: "byValue",
+        target: "ServiceType",
+        callback: ({ optionsSet, filterValues, onFilterChange }) => (
+            <SelectGrid
+                optionCallback={(value) => <>{value}</>}
+                options={[...optionsSet]}
+                filterValues={filterValues}
+                onFilterChange={onFilterChange}
+            />
+        ),
+    },
+    {
+        label: "Filter by Car Count",
+        type: "range",
+        target: "CarCount",
+        callback: ({ minMax, filterValues, onFilterChange }) => (
+            <DoubleRange
+                minMax={minMax}
+                filterValues={filterValues}
+                onFilterChange={onFilterChange}
+            />
+        ),
+    },
+];
 
 const trains = [
     {

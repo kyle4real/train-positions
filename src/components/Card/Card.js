@@ -3,7 +3,6 @@ import styles from "./Card.module.css";
 
 const Card = ({ train }) => {
     const cardBgClass = train.LineCode ? `bg--${train.LineCode}` : ``;
-    console.log(cardBgClass);
     return (
         <div className={`${styles.card} ${cardBgClass}`}>
             <div className={styles.card__top}>{train.LineCode}</div>

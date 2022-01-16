@@ -5,9 +5,9 @@ import { AiOutlineCheck } from "react-icons/ai";
 
 const Checkbox = ({ isActive, onClick }) => {
     return (
-        <button className={styles.checkbox} onClick={onClick && onClick}>
+        <div className={styles.checkbox} onClick={onClick && onClick}>
             {isActive && <AiOutlineCheck />}
-        </button>
+        </div>
     );
 };
 
