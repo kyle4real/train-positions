@@ -1,4 +1,5 @@
 import React from "react";
+import DoubleRange from "../DoubleRange/DoubleRange";
 import LineColor from "../LineColor/LineColor";
 import SelectGrid from "../SelectGrid/SelectGrid";
 import styles from "./FiltersGrid.module.css";
@@ -16,6 +17,7 @@ const FiltersGrid = () => {
             </div>
             <div className={styles.filtersgrid__item}>
                 <span className={styles.filtersgrid__item__title}>Filter by Car Count</span>
+                <DoubleRange />
             </div>
         </div>
     );
