@@ -6,19 +6,20 @@ const DoubleRange = ({ minMax, filterValues, onFilterChange }) => {
     const initialInput = minMax;
 
     const inputChangeHandler = ({ target: { value, name } }) => {
-        let index;
-        if (name === `input1`) index = 0;
-        else index = 1;
-
+        let index = name === `input1` ? 0 : 1;
+        value = parseInt(value);
         if (!filterValues) {
-            const val = [...initialInput];
-            val[index] = parseInt(value);
-            return onFilterChange(val);
+            const inputs = [...initialInput];
+            if ((!index && value > inputs[1]) || (index && value < inputs[0])) return;
+            inputs[index] = parseInt(value);
+            return onFilterChange(inputs);
         } else {
-            const val = [...filterValues];
-            val[index] = parseInt(value);
-            if (val[0] === initialInput[0] && val[1] === initialInput[1]) onFilterChange(null);
-            else return onFilterChange(val);
+            const inputs = [...filterValues];
+            if ((!index && value > inputs[1]) || (index && value < inputs[0])) return;
+            inputs[index] = parseInt(value);
+            if (inputs[0] === initialInput[0] && inputs[1] === initialInput[1])
+                onFilterChange(null);
+            else return onFilterChange(inputs);
         }
     };
 
