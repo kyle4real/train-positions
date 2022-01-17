@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./Card.module.css";
 
 const Card = ({ train }) => {
-    const cardBgClass = train.LineCode ? `bg--${train.LineCode}` : ``;
+    const cardBgClass = train.LineCode ? `bg--${train.LineCode}` : `bg--null`;
     return (
         <div className={`${styles.card} ${cardBgClass}`}>
-            <div className={styles.card__top}>{train.LineCode}</div>
+            <div className={styles.card__top}>{train.LineCode || "N/A"}</div>
             <div className={styles.card__content}>
                 <div className={styles.card__content__carcount}>
                     <span className={styles.card__content__carcount__span}>

@@ -34,3 +34,13 @@
     font-size: 28px;
     font-weight: 500;
 }
+
+.header__content__theme {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+.header__content__theme > svg {
+    width: 100%;
+    height: 100%;
+}

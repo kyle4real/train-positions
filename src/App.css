@@ -87,3 +87,6 @@ button {
 .bg--SV {
     background: var(--lc-silver);
 }
+.bg--null {
+    color: var(--text) !important;
+}
