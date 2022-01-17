@@ -18,7 +18,7 @@
 
 .card__content {
     border-radius: var(--border-radius-2);
-    background: var(--bg3);
+    background: var(--bg2);
     /* height: 175px; */
     padding: var(--md-spacing);
     min-height: calc(100% - 32px);

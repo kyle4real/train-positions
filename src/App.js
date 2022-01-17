@@ -20,29 +20,4 @@ function App() {
     );
 }
 
-// const [trainPositions, setTrainPositions] = useState([]);
-// const [error, setError] = useState();
-
-// useEffect(() => {
-//     const fetchTrainData = async () => {
-//         try {
-//             const response = await fetch(
-//                 `https://api.wmata.com/TrainPositions/TrainPositions?contentType=json`,
-//                 {
-//                     headers: {
-//                         api_key: "b3e90f95658b4ea995ac4857d53ee6e1",
-//                     },
-//                 }
-//             );
-//             const { trainPositions } = await response.json();
-//             setTrainPositions(trainPositions);
-//         } catch (error) {
-//             setError(error);
-//         }
-//     };
-//     fetchTrainData();
-// }, []);
-
-// console.log(trainPositions);
-
 export default App;

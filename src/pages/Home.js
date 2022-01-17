@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordian from "../components/Accordian/Accordian";
 import DoubleRange from "../components/DoubleRange/DoubleRange";
 import DropdownButton from "../components/DropdownButton/DropdownButton";
@@ -11,7 +11,29 @@ import useSearch from "../hooks/useSearch";
 
 const Home = () => {
     const [filterOpen, setFilterOpen] = useState(false);
+    const [trains, setTrains] = useState([]);
+    const [error, setError] = useState();
     const { filterArr, searchedArr } = useSearch({ resourceArr: trains, filters });
+
+    useEffect(() => {
+        const fetchTrainData = async () => {
+            try {
+                const response = await fetch(
+                    `https://api.wmata.com/TrainPositions/TrainPositions?contentType=json`,
+                    {
+                        headers: {
+                            api_key: "b3e90f95658b4ea995ac4857d53ee6e1",
+                        },
+                    }
+                );
+                const { TrainPositions } = await response.json();
+                setTrains(TrainPositions);
+            } catch (error) {
+                setError(error);
+            }
+        };
+        fetchTrainData();
+    }, []);
 
     return (
         <>
@@ -73,7 +95,7 @@ const filters = [
     },
 ];
 
-const trains = [
+const dummyData = [
     {
         TrainId: "100",
         TrainNumber: "301",
@@ -136,7 +158,7 @@ const trains = [
         DirectionNum: 2,
         CircuitId: 1969,
         DestinationStationCode: null,
-        LineCode: "SV",
+        LineCode: "RD",
         SecondsAtLocation: 0,
         ServiceType: "Normal",
     },
@@ -147,7 +169,7 @@ const trains = [
         DirectionNum: 1,
         CircuitId: 1234,
         DestinationStationCode: "A01",
-        LineCode: "SV",
+        LineCode: "RD",
         SecondsAtLocation: 0,
         ServiceType: "Normal",
     },
