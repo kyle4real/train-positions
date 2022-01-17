@@ -60,36 +60,42 @@ const useSearch = ({ resourceArr, filters }) => {
         return newResourceArr;
     }, [resourceArr, filterObj, filters, filtersIndexHash]);
 
-    const filterArr = filters.reduce((r, v) => {
-        const { target, type, callback, label } = v;
-        if (type === "byValue") {
-            const optionsSet = getSet(resourceArr, target);
-            return [
-                ...r,
-                {
-                    label,
-                    component: callback({
-                        optionsSet,
-                        onFilterChange: (filterArr) => onFilterChange({ target, filterArr }),
-                        filterValues: filterObj?.[target] || null,
-                    }),
-                },
-            ];
-        } else {
-            const minMax = getMinMax(resourceArr, target);
-            return [
-                ...r,
-                {
-                    label,
-                    component: callback({
-                        minMax,
-                        onFilterChange: (filterArr) => onFilterChange({ target, filterArr }),
-                        filterValues: filterObj?.[target] || null,
-                    }),
-                },
-            ];
-        }
-    }, []);
+    const filterArr = useMemo(
+        () =>
+            filters.reduce((r, v) => {
+                const { target, type, callback, label } = v;
+                if (type === "byValue") {
+                    const optionsSet = getSet(resourceArr, target);
+                    return [
+                        ...r,
+                        {
+                            label,
+                            component: callback({
+                                optionsSet,
+                                onFilterChange: (filterArr) =>
+                                    onFilterChange({ target, filterArr }),
+                                filterValues: filterObj?.[target] || null,
+                            }),
+                        },
+                    ];
+                } else {
+                    const minMax = getMinMax(resourceArr, target);
+                    return [
+                        ...r,
+                        {
+                            label,
+                            component: callback({
+                                minMax,
+                                onFilterChange: (filterArr) =>
+                                    onFilterChange({ target, filterArr }),
+                                filterValues: filterObj?.[target] || null,
+                            }),
+                        },
+                    ];
+                }
+            }, []),
+        [filterObj, filters, resourceArr]
+    );
 
     return { searchedArr, filterArr };
 };

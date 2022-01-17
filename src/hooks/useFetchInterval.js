@@ -4,17 +4,20 @@ const useFetchInterval = ({ request, intervalMS }) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [updating, setUpdating] = useState(false);
 
     useEffect(() => {
         const sendRequest = async () => {
-            setLoading(true);
+            setUpdating(true);
             try {
                 const response = await request();
+                if (!response.ok) throw new Error(response.statusText);
                 const data = await response.json();
                 setData(data);
             } catch (error) {
-                setError(error);
+                setError(true);
             } finally {
+                setUpdating(false);
                 setLoading(false);
             }
         };
@@ -24,7 +27,7 @@ const useFetchInterval = ({ request, intervalMS }) => {
         return () => clearInterval(interval);
     }, [intervalMS, request]);
 
-    return { data, error, loading };
+    return { data, error, loading, updating };
 };
 
 export default useFetchInterval;

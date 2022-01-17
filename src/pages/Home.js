@@ -14,13 +14,14 @@ import useSearch from "../hooks/useSearch";
 
 const Home = () => {
     const [filterOpen, setFilterOpen] = useState(false);
-    const { data, loading, error } = useFetchInterval({
+    const { data, loading, error, updating } = useFetchInterval({
         request: getTrainPositions,
         intervalMS: 1000 * 10,
     });
     const trains = data?.TrainPositions || [];
     const { filterArr, searchedArr } = useSearch({ resourceArr: trains, filters });
 
+    const shouldRender = !loading && !error;
     return (
         <>
             <PageHead
@@ -30,13 +31,21 @@ const Home = () => {
                         Filter Search
                     </DropdownButton>
                 }
-                center={<Live updating={loading} />}
+                center={shouldRender && <Live updating={updating} />}
             >
                 <Accordian isOpen={filterOpen}>
                     <FiltersGrid filters={filterArr} />
                 </Accordian>
             </PageHead>
-            {!error ? <Grid trains={searchedArr} /> : <>There was an error.</>}
+            {!error ? (
+                !loading ? (
+                    <Grid trains={searchedArr} />
+                ) : (
+                    <>Loading Train Positions.</>
+                )
+            ) : (
+                <>There was an error. Please refresh or try again later.</>
+            )}
         </>
     );
 };
