@@ -12,8 +12,8 @@ const Card = ({ train }) => {
                         {train.CarCount} Train Cars
                     </span>
                     <div className={styles[`carcount-grid`]}>
-                        {Array.from({ length: train.CarCount }).map(() => (
-                            <div className={styles[`carcount-grid__item`]} />
+                        {Array.from({ length: train.CarCount }).map((_, index) => (
+                            <div className={styles[`carcount-grid__item`]} key={index} />
                         ))}
                     </div>
                 </div>
