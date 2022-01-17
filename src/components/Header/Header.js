@@ -3,6 +3,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import styles from "./Header.module.css";
 
 import { BsMoon } from "react-icons/bs";
+import Logo from "./Logo/Logo";
 
 const Header = () => {
     const { themeToggleHandler } = useContext(ThemeContext);
@@ -12,7 +13,7 @@ const Header = () => {
             <div className={styles.offset} />
             <div className={styles.header}>
                 <div className={styles.header__content}>
-                    <span className={styles.header__content__logo}>Train Positions</span>
+                    <Logo />
                     <button onClick={themeToggleHandler} className={styles.header__content__theme}>
                         <BsMoon />
                     </button>

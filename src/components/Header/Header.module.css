@@ -30,11 +30,6 @@
     }
 }
 
-.header__content__logo {
-    font-size: 28px;
-    font-weight: 500;
-}
-
 .header__content__theme {
     cursor: pointer;
     width: 24px;

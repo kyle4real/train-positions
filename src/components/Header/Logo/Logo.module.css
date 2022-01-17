@@ -1,0 +1,20 @@
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo__text {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.logo__img {
+    margin-right: var(--md-spacing);
+    width: var(--lg-spacing);
+    height: var(--lg-spacing);
+}
+
+.logo__img img {
+    max-width: 100%;
+    height: auto;
+}
