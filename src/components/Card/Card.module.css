@@ -3,6 +3,10 @@
     box-shadow: var(--box-shadow);
 }
 
+.card:hover {
+    box-shadow: var(--box-shadow-2);
+}
+
 .card__top {
     height: 32px;
     padding-right: var(--border-radius);

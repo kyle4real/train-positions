@@ -1,39 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { getTrainPositions } from "../api";
 import Accordian from "../components/Accordian/Accordian";
 import DoubleRange from "../components/DoubleRange/DoubleRange";
 import DropdownButton from "../components/DropdownButton/DropdownButton";
 import FiltersGrid from "../components/FiltersGrid/FiltersGrid";
 import Grid from "../components/Grid/Grid";
 import LineColor from "../components/LineColor/LineColor";
+import Live from "../components/Live/Live";
 import PageHead from "../components/PageHead/PageHead";
 import SelectGrid from "../components/SelectGrid/SelectGrid";
+import useFetchInterval from "../hooks/useFetchInterval";
 import useSearch from "../hooks/useSearch";
 
 const Home = () => {
     const [filterOpen, setFilterOpen] = useState(false);
-    const [trains, setTrains] = useState([]);
-    const [error, setError] = useState();
+    const { data, loading, error } = useFetchInterval({
+        request: getTrainPositions,
+        intervalMS: 1000 * 10,
+    });
+    const trains = data?.TrainPositions || [];
     const { filterArr, searchedArr } = useSearch({ resourceArr: trains, filters });
-
-    useEffect(() => {
-        const fetchTrainData = async () => {
-            try {
-                const response = await fetch(
-                    `https://api.wmata.com/TrainPositions/TrainPositions?contentType=json`,
-                    {
-                        headers: {
-                            api_key: "b3e90f95658b4ea995ac4857d53ee6e1",
-                        },
-                    }
-                );
-                const { TrainPositions } = await response.json();
-                setTrains(TrainPositions);
-            } catch (error) {
-                setError(error);
-            }
-        };
-        fetchTrainData();
-    }, []);
 
     return (
         <>
@@ -44,12 +30,13 @@ const Home = () => {
                         Filter Search
                     </DropdownButton>
                 }
+                center={<Live updating={loading} />}
             >
                 <Accordian isOpen={filterOpen}>
                     <FiltersGrid filters={filterArr} />
                 </Accordian>
             </PageHead>
-            <Grid trains={searchedArr} />
+            {!error ? <Grid trains={searchedArr} /> : <>There was an error.</>}
         </>
     );
 };
